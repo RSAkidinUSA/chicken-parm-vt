@@ -58,7 +58,7 @@ def main():
     cp_database.get_update()
     server = ThreadingSimpleServer(('0.0.0.0', PORT), Handler)
     print("Serving HTTP traffic from", CWD, "on", HOST, "using port", PORT)
-    server.socket = ssl.wrap_socket(server.socket, keyfile="./key.pem", certfile="./cert.pem", server_side=True)
+    server.socket = ssl.wrap_socket(server.socket, keyfile="./key_unenc.pem", certfile="./cert.pem", server_side=True)
     try:
         while 1:
             sys.stdout.flush()

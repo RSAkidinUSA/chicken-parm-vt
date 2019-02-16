@@ -10,7 +10,7 @@ COPY server.py ./
 COPY database.py ./
 COPY requirements.txt ./
 COPY cert.pem ./
-COPY key.pem ./
+COPY key_unenc.pem ./
 
 RUN python3 -m pip install -r requirements.txt
 
