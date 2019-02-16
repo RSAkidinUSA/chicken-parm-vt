@@ -22,4 +22,4 @@ class CPDatabase():
     def get_menu(self):
         menu = Query()
         item = self.table.search(menu.date.exists())
-        return str(item[0]['date'])
+        return str(item[0]['date'][0])

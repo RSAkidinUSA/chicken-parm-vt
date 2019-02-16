@@ -3,6 +3,9 @@ import sys, os, socket
 from socketserver import ThreadingMixIn
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import ssl
+import json
+import datetime
+import uuid
 
 HOST = socket.gethostname()
 
@@ -13,9 +16,23 @@ cp_database = CPDatabase()
 class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
+        # pick apart request
+        print(self.request)
         self.send_response(200)
+        self.send_header("Content-Type","application/json")
         self.end_headers()
-        self.wfile.write("Next Date: {}".format(cp_database.get_menu()).encode())
+        payload = {
+            "version": "1.0",
+            "response": {
+                "outputSpeech": {
+                    "type": "PlainText",
+                    "text": "Test Text",
+                    "playBehavior": "REPLACE_ENQUEUED"
+                },
+                "shouldEndSession": true
+            }
+        }
+        Reelf.wfile.write(json.dumps(payload).encode())
 
 class ThreadingSimpleServer(ThreadingMixIn, HTTPServer):
     pass
