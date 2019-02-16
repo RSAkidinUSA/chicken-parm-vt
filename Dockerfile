@@ -6,7 +6,6 @@ RUN apk add python3
 WORKDIR /usr/src/scraper
 
 COPY scraper.py ./
-COPY slack.env ./
 COPY server.py ./
 COPY database.py ./
 COPY requirements.txt ./
