@@ -6,15 +6,16 @@ import ssl
 
 HOST = socket.gethostname()
 
-import scraper
+from database import CPDatabase
+
+cp_database = CPDatabase()
 
 class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         self.send_response(200)
         self.end_headers()
-        message = scraper.get_menu()
-        self.wfile.write("Next Date: {}".format(message).encode())
+        self.wfile.write("Next Date: {}".format(cp_database.get_menu()).encode())
 
 class ThreadingSimpleServer(ThreadingMixIn, HTTPServer):
     pass
@@ -37,6 +38,7 @@ def main():
     else:
         CWD = os.getcwd()
 
+    cp_database.get_update()
     server = ThreadingSimpleServer(('0.0.0.0', PORT), Handler)
     print("Serving HTTP traffic from", CWD, "on", HOST, "using port", PORT)
     server.socket = ssl.wrap_socket(server.socket, keyfile="./key_unenc.pem", certfile="./cert.pem", server_side=True)
