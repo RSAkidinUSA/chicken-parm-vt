@@ -8,6 +8,8 @@ import requests
 import schedule
 import time
 import sys
+import datetime
+import time
 
 from bs4 import BeautifulSoup
 
@@ -99,17 +101,25 @@ def get_menu():
 #         return '\n'.join(msgs)
 #     else:
 #         return 'Retroactive updates to the scoreboard.\n'
-    
+
+
+def convert_date_to_unix(date_string):
+    """Take a date as a string in the form "Wed, Feb 20". Convert it to a unix time 
+    """
 
 
 if __name__ == '__main__':
-    init_settings()
-    cp_date = get_menu()
-    if cp_date != None:
-        post_updates(cp_date)
-    else:
-        print("Unable to determine the date for chicken parm :(")
-    # schedule.every(3).minutes.do(check_for_updates)
-    # while True:
-    #     schedule.run_pending()
-    #     time.sleep(1)
+    last_valid_time = datetime.datetime.now()
+    while True:
+        time.sleep(5)
+        current_time = datetime.datetime.now()
+        init_settings()
+        cp_date = get_menu()
+        if cp_date != None:
+            post_updates(cp_date)
+        else:
+            print("Unable to determine the date for chicken parm :(")
+        # schedule.every(3).minutes.do(check_for_updates)
+        # while True:
+        #     schedule.run_pending()
+        #     time.sleep(1)
