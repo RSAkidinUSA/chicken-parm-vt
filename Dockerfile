@@ -1,11 +1,18 @@
 FROM alpine:3.7
 
 RUN apk add python3
-RUN python3 -m pip install requests schedule beautifulsoup4
+
 
 WORKDIR /usr/src/scraper
 
 COPY scraper.py ./
 COPY slack.env ./
+COPY server.py ./
+COPY database.py ./
+COPY requirements.txt ./
+COPY cert.pem ./
+COPY key_unenc.pem ./
 
-CMD [ "python3", "./scraper.py"]
+RUN python3 -m pip install -r requirements.txt
+
+CMD [ "python3", "./server.py"]
