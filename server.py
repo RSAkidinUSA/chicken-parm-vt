@@ -29,7 +29,7 @@ class Handler(BaseHTTPRequestHandler):
                     "text": "Test Text",
                     "playBehavior": "REPLACE_ENQUEUED"
                 },
-                "shouldEndSession": true
+                "shouldEndSession": True
             }
         }
         Reelf.wfile.write(json.dumps(payload).encode())
@@ -47,7 +47,7 @@ class Handler(BaseHTTPRequestHandler):
                     "text": "Test Text",
                     "playBehavior": "REPLACE_ENQUEUED"
                 },
-                "shouldEndSession": true
+                "shouldEndSession": True
             }
         }
         Reelf.wfile.write(json.dumps(payload).encode())
