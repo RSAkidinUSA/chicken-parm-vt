@@ -15,6 +15,24 @@ cp_database = CPDatabase()
 
 class Handler(BaseHTTPRequestHandler):
 
+    def do_POST(self):
+        # pick apart request
+        print(self.request)
+        self.send_response(200)
+        self.send_header("Content-Type","application/json")
+        self.end_headers()
+        payload = {
+            "version": "1.0",
+            "response": {
+                "outputSpeech": {
+                    "type": "PlainText",
+                    "text": "Test Text",
+                    "playBehavior": "REPLACE_ENQUEUED"
+                },
+                "shouldEndSession": true
+            }
+        }
+        Reelf.wfile.write(json.dumps(payload).encode())
     def do_GET(self):
         # pick apart request
         print(self.request)
